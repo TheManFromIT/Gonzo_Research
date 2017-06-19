@@ -1,0 +1,23 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Gonzo.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MaliciousBSSID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">fa:8f:ca:5b:39:6d</Value>
+    </Setting>
+    <Setting Name="PingSiteList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;www.google.co.uk&lt;/string&gt;
+  &lt;string&gt;www.dave.com&lt;/string&gt;
+  &lt;string&gt;www.google.com&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="PingBody" Type="System.Guid" Scope="User">
+      <Value Profile="(Default)">20d6fdd0-746a-4196-940a-c18291fe881a</Value>
+    </Setting>
+    <Setting Name="PingTimeout" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:00:15</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
