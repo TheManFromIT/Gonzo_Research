@@ -16,7 +16,7 @@ namespace Gonzo.Microservice
 
         public OuiDb()
         {
-            
+
         }
 
 
@@ -38,10 +38,10 @@ namespace Gonzo.Microservice
 
         public void Load()
         {
-            
-            DownLoad("https://code.wireshark.org/review/gitweb?p=wireshark.git;a=blob_plain;f=manuf","C:\\temps\\db.txt");
+           
+            var dataFile = DownLoad("https://code.wireshark.org/review/gitweb?p=wireshark.git;a=blob_plain;f=manuf");
 
-            var lines = File.ReadAllLines("C:\\temps\\db.txt");
+            var lines = dataFile.Split('\n');
 
             foreach (var line in lines)
             {
@@ -98,7 +98,7 @@ namespace Gonzo.Microservice
 
         }
 
-        protected virtual void DownLoad(String url, String fileName)
+        protected virtual String DownLoad(String url)
         {
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
@@ -106,16 +106,15 @@ namespace Gonzo.Microservice
 
             using (WebResponse response = (HttpWebResponse)request.GetResponse())
             {
-                using (FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
-                {
-                    byte[] bytes = ReadFully(response.GetResponseStream());
+                var data = UTF8Encoding.UTF8.GetString(ReadAll(response.GetResponseStream()));
 
-                    stream.Write(bytes, 0, bytes.Length);
-                }
+                return data;
+                
             }
+
         }
 
-        public static byte[] ReadFully(Stream input)
+        public static byte[] ReadAll(Stream input)
         {
             byte[] buffer = new byte[16 * 1024];
             using (MemoryStream ms = new MemoryStream())
