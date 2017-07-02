@@ -33,6 +33,7 @@
             this.butPingTest = new System.Windows.Forms.Button();
             this.tailvewLog = new TheManFromIT.Components.TailViewer();
             this.butListNeworks = new System.Windows.Forms.Button();
+            this.butLoadOUIDB = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -69,7 +70,7 @@
             this.tailvewLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tailvewLog.Location = new System.Drawing.Point(16, 53);
+            this.tailvewLog.Location = new System.Drawing.Point(16, 44);
             this.tailvewLog.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tailvewLog.Name = "tailvewLog";
             this.tailvewLog.Size = new System.Drawing.Size(799, 289);
@@ -86,11 +87,22 @@
             this.butListNeworks.UseVisualStyleBackColor = true;
             this.butListNeworks.Click += new System.EventHandler(this.butListNeworks_Click);
             // 
+            // butLoadOUIDB
+            // 
+            this.butLoadOUIDB.Location = new System.Drawing.Point(581, 14);
+            this.butLoadOUIDB.Name = "butLoadOUIDB";
+            this.butLoadOUIDB.Size = new System.Drawing.Size(132, 30);
+            this.butLoadOUIDB.TabIndex = 7;
+            this.butLoadOUIDB.Text = "Load OUI DB";
+            this.butLoadOUIDB.UseVisualStyleBackColor = true;
+            this.butLoadOUIDB.Click += new System.EventHandler(this.butLoadOUIDB_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(828, 356);
+            this.Controls.Add(this.butLoadOUIDB);
             this.Controls.Add(this.butListNeworks);
             this.Controls.Add(this.tailvewLog);
             this.Controls.Add(this.butPingTest);
@@ -111,6 +123,7 @@
         private System.Windows.Forms.Button butPingTest;
         private TheManFromIT.Components.TailViewer tailvewLog;
         private System.Windows.Forms.Button butListNeworks;
+        private System.Windows.Forms.Button butLoadOUIDB;
     }
 }
 

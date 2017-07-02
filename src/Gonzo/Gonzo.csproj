@@ -58,6 +58,8 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Microservice\OuiDb.cs" />
+    <Compile Include="Microservice\OUIRecord.cs" />
     <Compile Include="Trumpet.cs" />
     <Compile Include="Networking\Utils.cs" />
     <Compile Include="Nose.cs" />

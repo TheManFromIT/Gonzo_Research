@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Gonzo.Microservice;
 using Gonzo.Networking;
 
 namespace Gonzo
@@ -20,7 +20,7 @@ namespace Gonzo
         public FormMain()
         {
             InitializeComponent();
-            
+
             _nozyParker = new Nose(Utils.GetNetworkIpAddress(), Properties.Settings.Default.MaliciousBSSID, Properties.Settings.Default.PingSiteList, Properties.Settings.Default.PingBody, Properties.Settings.Default.PingTimeout);
 
             _nozyParker.WifiConnected += HandleNozyParkerWifiConnected;
@@ -38,17 +38,17 @@ namespace Gonzo
 
         private void _nozyParker_WifiDisconnecting(object sender, EventArgs e)
         {
-            
+
         }
 
         private void HandleNozyParkerWifiConnected(object sender, EventArgs e)
         {
-            
+
         }
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void HandlePingTest(object sender, EventArgs e)
@@ -63,6 +63,13 @@ namespace Gonzo
 
             _nozyParker.GetActiveAccesPoints();
 
+        }
+
+        private void butLoadOUIDB_Click(object sender, EventArgs e)
+        {
+            var db = new OuiDb();
+
+            db.Load();
         }
     }
 }

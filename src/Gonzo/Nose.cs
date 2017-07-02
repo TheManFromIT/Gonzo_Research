@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
+using Gonzo.Microservice;
 using Gonzo.Networking;
 using wclWiFi;
 
@@ -17,7 +17,7 @@ namespace Gonzo
     public class Nose
     {
 
-        public const string TOXIC_MAC = "fa:8f:ca:5b:39:69";
+        public const string TOXIC_MAC = "aa:40:a0:6f:04:a7";
 
         public const string CHROME_CAST = "FA:8F:CA";
 
@@ -42,8 +42,11 @@ namespace Gonzo
 
         private IPAddress _currentPingAddress;
 
+        private OuiDb ouiDb = new OuiDb();
+
         public Nose(IPAddress localIpAddress, String maliciousBSSID, StringCollection pingSiteList, Guid pingBody, TimeSpan pingTimeout)
         {
+
             _localIpAddress = localIpAddress;
             _maliciousBssid = maliciousBSSID;
             _pingSiteList = pingSiteList;
@@ -53,6 +56,8 @@ namespace Gonzo
 
         public void Startup()
         {
+            ouiDb.Load();
+
             SetupHostPing();
 
             SetupWifiScanner();
@@ -120,13 +125,22 @@ namespace Gonzo
                 {
                     foreach (var bss in bssList)
                     {
-                        string type = bss.Mac.Equals(TOXIC_MAC, StringComparison.CurrentCultureIgnoreCase) ? "<<<< THEIFING BASTARTS" : String.Empty;
+                        string type = bss.Mac.Equals(TOXIC_MAC, StringComparison.CurrentCultureIgnoreCase) ? "<<<< THIEVING BASTARTS" : String.Empty;
 
-                        string status = bss.Mac.StartsWith(CHROME_CAST, StringComparison.CurrentCultureIgnoreCase) && String.IsNullOrWhiteSpace(bss.Ssid) ? "!!! SUSPECT DEVICE !!!" : String.Empty;
+                        string status = bss.Mac.StartsWith(CHROME_CAST, StringComparison.CurrentCultureIgnoreCase) && String.IsNullOrEmpty(bss.Ssid) ? "CHROME CAST?" : String.Empty;
 
                         string mode = String.IsNullOrWhiteSpace(bss.Ssid) ? "<<< STEALTH >>>" : String.Empty;
 
-                        Log($"{bss.ChCenterFrequency} {bss.Ssid} {bss.Mac} {bss.Rssi} {type} {status} {mode}");
+                        string manufacturer = String.Empty;
+
+                        OuiRecord record = null;
+
+                        if (ouiDb.TryFind(bss.Mac, out record))
+                        {
+                            manufacturer = record.Manufacturer;
+                        }
+
+                        Log($"{bss.ChCenterFrequency} {bss.Ssid} {bss.Mac} {bss.Rssi} {type} {status} {mode} {manufacturer}");
                     }
                 }
 
