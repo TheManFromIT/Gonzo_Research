@@ -101,15 +101,36 @@ namespace Gonzo
         public List<AccessPoint> GetActiveAccesPoints()
         {
 
+            //wclNetworkListManager networkListManager = new wclNetworkListManager();
 
+            //networkListManager.Open();
 
+            //wclNlmNetwork[] networks = null;
+
+            //networkListManager.GetNetworks(wclNlmEnumNetwork.nlmEnumAll, out networks);
+
+            //wclNlmConnection[] connections = null;
+
+            //networkListManager.GetConnections(out connections);
+            
             wclWiFiInterfaceData[] networkInterfaces = null;
 
             _wiFiClient.EnumInterfaces(out networkInterfaces);
 
+            wclWiFiSniffer sniffer = new wclWiFiSniffer();            
+
+            sniffer.OnRawFrameReceived += Sniffer_OnRawFrameReceived;
+
             foreach (var newtworkInterface in networkInterfaces)
             {
                 Log($"{newtworkInterface.Description} {newtworkInterface.Id:N}");
+
+                if (!sniffer.Active)
+                {
+
+                    sniffer.Open(newtworkInterface.Id);
+
+                }
 
                 _wiFiClient.Scan(newtworkInterface.Id, String.Empty);
 
@@ -124,7 +145,9 @@ namespace Gonzo
                 if (bssList != null)
                 {
                     foreach (var bss in bssList)
-                    {
+                    {                                               
+                        
+
                         string type = bss.Mac.Equals(TOXIC_MAC, StringComparison.CurrentCultureIgnoreCase) ? "<<<< THIEVING BASTARTS" : String.Empty;
 
                         string status = bss.Mac.StartsWith(CHROME_CAST, StringComparison.CurrentCultureIgnoreCase) && String.IsNullOrEmpty(bss.Ssid) ? "CHROME CAST?" : String.Empty;
@@ -140,13 +163,18 @@ namespace Gonzo
                             manufacturer = record.Manufacturer;
                         }
 
-                        Log($"{bss.ChCenterFrequency} {bss.Ssid} {bss.Mac} {bss.Rssi} {type} {status} {mode} {manufacturer}");
+                        Log($"{bss.ChCenterFrequency} {bss.Ssid} {bss.Mac} {bss.Rssi} {type} {status} {mode} {manufacturer} {bss.PhyId}");
                     }
                 }
 
             }
 
             return null;
+        }
+
+        private void Sniffer_OnRawFrameReceived(object Sender, byte[] Buffer)
+        {
+            var data = UTF8Encoding.UTF8.GetString(Buffer);
         }
 
         private void HandleWiFiClientBeforeClose(object sender, EventArgs e)

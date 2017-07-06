@@ -31,9 +31,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtMaliciousBSSID = new System.Windows.Forms.TextBox();
             this.butPingTest = new System.Windows.Forms.Button();
-            this.tailvewLog = new TheManFromIT.Components.TailViewer();
             this.butListNeworks = new System.Windows.Forms.Button();
             this.butLoadOUIDB = new System.Windows.Forms.Button();
+            this.tailvewLog = new TheManFromIT.Components.TailViewer();
+            this.lstvewNetworks = new System.Windows.Forms.ListView();
+            this.colhedSSID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // label1
@@ -65,18 +67,6 @@
             this.butPingTest.UseVisualStyleBackColor = true;
             this.butPingTest.Click += new System.EventHandler(this.HandlePingTest);
             // 
-            // tailvewLog
-            // 
-            this.tailvewLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tailvewLog.Location = new System.Drawing.Point(16, 44);
-            this.tailvewLog.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tailvewLog.Name = "tailvewLog";
-            this.tailvewLog.Size = new System.Drawing.Size(799, 289);
-            this.tailvewLog.TabIndex = 4;
-            this.tailvewLog.Target = "";
-            // 
             // butListNeworks
             // 
             this.butListNeworks.Location = new System.Drawing.Point(443, 15);
@@ -97,11 +87,41 @@
             this.butLoadOUIDB.UseVisualStyleBackColor = true;
             this.butLoadOUIDB.Click += new System.EventHandler(this.butLoadOUIDB_Click);
             // 
+            // tailvewLog
+            // 
+            this.tailvewLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tailvewLog.Location = new System.Drawing.Point(16, 355);
+            this.tailvewLog.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tailvewLog.Name = "tailvewLog";
+            this.tailvewLog.Size = new System.Drawing.Size(799, 164);
+            this.tailvewLog.TabIndex = 4;
+            this.tailvewLog.Target = "";
+            // 
+            // lstvewNetworks
+            // 
+            this.lstvewNetworks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colhedSSID});
+            this.lstvewNetworks.Enabled = false;
+            this.lstvewNetworks.Location = new System.Drawing.Point(16, 60);
+            this.lstvewNetworks.Name = "lstvewNetworks";
+            this.lstvewNetworks.Size = new System.Drawing.Size(799, 287);
+            this.lstvewNetworks.TabIndex = 8;
+            this.lstvewNetworks.UseCompatibleStateImageBehavior = false;
+            this.lstvewNetworks.View = System.Windows.Forms.View.Details;
+            // 
+            // colhedSSID
+            // 
+            this.colhedSSID.Text = "SSID";
+            this.colhedSSID.Width = 157;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(828, 356);
+            this.ClientSize = new System.Drawing.Size(828, 542);
+            this.Controls.Add(this.lstvewNetworks);
             this.Controls.Add(this.butLoadOUIDB);
             this.Controls.Add(this.butListNeworks);
             this.Controls.Add(this.tailvewLog);
@@ -124,6 +144,8 @@
         private TheManFromIT.Components.TailViewer tailvewLog;
         private System.Windows.Forms.Button butListNeworks;
         private System.Windows.Forms.Button butLoadOUIDB;
+        private System.Windows.Forms.ListView lstvewNetworks;
+        private System.Windows.Forms.ColumnHeader colhedSSID;
     }
 }
 

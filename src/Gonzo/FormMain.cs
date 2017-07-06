@@ -9,13 +9,19 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Gonzo.Microservice;
 using Gonzo.Networking;
+using wclWiFi;
 
 namespace Gonzo
 {
     public partial class FormMain : Form
     {
 
+        delegate void NetworkListAddDelegate(Guid networkId);
+        delegate void NetworkListDeleteDelegate(Guid networkId);
+
         private readonly Nose _nozyParker;
+
+        private readonly wclNetworkListManager _networkListManager = new wclNetworkListManager();
 
         public FormMain()
         {
@@ -28,6 +34,62 @@ namespace Gonzo
             _nozyParker.LogMessage += _nozyParker_LogMessage;
             _nozyParker.Startup();
 
+            _networkListManager.OnNetworkAdded += _networkListManager_OnNetworkAdded;
+            _networkListManager.OnNetworkDeleted += _networkListManager_OnNetworkDeleted;
+
+            _networkListManager.AfterOpen += _networkListManager_AfterOpen;
+
+            _networkListManager.Open();            
+
+        }
+
+        private void _networkListManager_AfterOpen(object sender, EventArgs e)
+        {
+            lstvewNetworks.Enabled = true;
+        }
+
+        private void _networkListManager_OnNetworkDeleted(object Sender, Guid NetworkId)
+        {
+            if (lstvewNetworks.InvokeRequired)
+            {
+                lstvewNetworks.Invoke(new NetworkListAddDelegate(AddNetwork), new[] {NetworkId});
+            }
+            else
+            {
+                AddNetwork(NetworkId);
+            }
+        }
+
+        private void _networkListManager_OnNetworkAdded(object Sender, Guid NetworkId)
+        {
+            if (lstvewNetworks.InvokeRequired)
+            {
+                lstvewNetworks.Invoke(new NetworkListDeleteDelegate(DeleteNetwork), new[] { NetworkId });
+            }
+            else
+            {
+                DeleteNetwork(NetworkId);
+            }
+        }
+
+        private void AddNetwork(Guid networkId)
+        {
+            var key = networkId.ToString("N");
+
+            if (!lstvewNetworks.Items.ContainsKey(key))
+            {
+                lstvewNetworks.Items.Add(key, "Network", 1);
+            }
+        }
+
+        private void DeleteNetwork(Guid networkId)
+        {
+            var key = networkId.ToString("N");
+
+            if (!lstvewNetworks.Items.ContainsKey(key))
+            {
+                lstvewNetworks.Items.Remove(lstvewNetworks.Items[key]);
+            }
         }
 
         private void _nozyParker_LogMessage(object sender, MessageEvents e)
