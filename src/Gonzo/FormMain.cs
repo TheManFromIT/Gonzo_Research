@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Gonzo.Microservice;
 using Gonzo.Networking;
+using MacAddressVendorLookup;
 using wclWiFi;
 
 namespace Gonzo
@@ -39,7 +39,8 @@ namespace Gonzo
 
             _networkListManager.AfterOpen += _networkListManager_AfterOpen;
 
-            _networkListManager.Open();            
+            _networkListManager.Open();
+
 
         }
 
@@ -129,9 +130,26 @@ namespace Gonzo
 
         private void butLoadOUIDB_Click(object sender, EventArgs e)
         {
-            var db = new OuiDb();
+            var vendorInfoProvider = new MacAddressVendorLookup.MacVendorBinaryReader();
+            using (var resourceStream = MacAddressVendorLookup.ManufBinResource.GetStream().Result)
+            {
+                vendorInfoProvider.Init(resourceStream).Wait();
+            }
+            var addressMatcher = new MacAddressVendorLookup.AddressMatcher(vendorInfoProvider);
 
-            db.Load();
+            var networkInterfaces = System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces()
+                .Where(ni => ni.NetworkInterfaceType != System.Net.NetworkInformation.NetworkInterfaceType.Tunnel)
+                .Where(ni => ni.NetworkInterfaceType != System.Net.NetworkInformation.NetworkInterfaceType.Loopback)
+                .Where(ni => !ni.GetPhysicalAddress().Equals(System.Net.NetworkInformation.PhysicalAddress.None));
+
+            foreach (var ni in networkInterfaces)
+            {
+                var vendorInfo = addressMatcher.FindInfo(ni.GetPhysicalAddress());
+                tailvewLog.Append("\nAdapter: " + ni.Description);
+                tailvewLog.Append($"\t{vendorInfo}");
+                var macAddr = BitConverter.ToString(ni.GetPhysicalAddress().GetAddressBytes()).Replace('-', ':');
+                tailvewLog.Append($"\tMAC Address: {macAddr}");
+            }
         }
     }
 }

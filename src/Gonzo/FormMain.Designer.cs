@@ -36,6 +36,11 @@
             this.tailvewLog = new TheManFromIT.Components.TailViewer();
             this.lstvewNetworks = new System.Windows.Forms.ListView();
             this.colhedSSID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.spltcontMain = new System.Windows.Forms.SplitContainer();
+            ((System.ComponentModel.ISupportInitialize)(this.spltcontMain)).BeginInit();
+            this.spltcontMain.Panel1.SuspendLayout();
+            this.spltcontMain.Panel2.SuspendLayout();
+            this.spltcontMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -79,23 +84,21 @@
             // 
             // butLoadOUIDB
             // 
-            this.butLoadOUIDB.Location = new System.Drawing.Point(581, 14);
+            this.butLoadOUIDB.Location = new System.Drawing.Point(684, 14);
             this.butLoadOUIDB.Name = "butLoadOUIDB";
             this.butLoadOUIDB.Size = new System.Drawing.Size(132, 30);
             this.butLoadOUIDB.TabIndex = 7;
-            this.butLoadOUIDB.Text = "Load OUI DB";
+            this.butLoadOUIDB.Text = "Test OUI DB";
             this.butLoadOUIDB.UseVisualStyleBackColor = true;
             this.butLoadOUIDB.Click += new System.EventHandler(this.butLoadOUIDB_Click);
             // 
             // tailvewLog
             // 
-            this.tailvewLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tailvewLog.Location = new System.Drawing.Point(16, 355);
+            this.tailvewLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tailvewLog.Location = new System.Drawing.Point(0, 0);
             this.tailvewLog.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tailvewLog.Name = "tailvewLog";
-            this.tailvewLog.Size = new System.Drawing.Size(799, 164);
+            this.tailvewLog.Size = new System.Drawing.Size(821, 479);
             this.tailvewLog.TabIndex = 4;
             this.tailvewLog.Target = "";
             // 
@@ -103,10 +106,11 @@
             // 
             this.lstvewNetworks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colhedSSID});
+            this.lstvewNetworks.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstvewNetworks.Enabled = false;
-            this.lstvewNetworks.Location = new System.Drawing.Point(16, 60);
+            this.lstvewNetworks.Location = new System.Drawing.Point(0, 0);
             this.lstvewNetworks.Name = "lstvewNetworks";
-            this.lstvewNetworks.Size = new System.Drawing.Size(799, 287);
+            this.lstvewNetworks.Size = new System.Drawing.Size(412, 479);
             this.lstvewNetworks.TabIndex = 8;
             this.lstvewNetworks.UseCompatibleStateImageBehavior = false;
             this.lstvewNetworks.View = System.Windows.Forms.View.Details;
@@ -116,21 +120,43 @@
             this.colhedSSID.Text = "SSID";
             this.colhedSSID.Width = 157;
             // 
+            // spltcontMain
+            // 
+            this.spltcontMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.spltcontMain.Location = new System.Drawing.Point(1, 51);
+            this.spltcontMain.Name = "spltcontMain";
+            // 
+            // spltcontMain.Panel1
+            // 
+            this.spltcontMain.Panel1.Controls.Add(this.lstvewNetworks);
+            // 
+            // spltcontMain.Panel2
+            // 
+            this.spltcontMain.Panel2.Controls.Add(this.tailvewLog);
+            this.spltcontMain.Size = new System.Drawing.Size(1237, 479);
+            this.spltcontMain.SplitterDistance = 412;
+            this.spltcontMain.TabIndex = 9;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(828, 542);
-            this.Controls.Add(this.lstvewNetworks);
+            this.ClientSize = new System.Drawing.Size(1250, 542);
+            this.Controls.Add(this.spltcontMain);
             this.Controls.Add(this.butLoadOUIDB);
             this.Controls.Add(this.butListNeworks);
-            this.Controls.Add(this.tailvewLog);
             this.Controls.Add(this.butPingTest);
             this.Controls.Add(this.txtMaliciousBSSID);
             this.Controls.Add(this.label1);
             this.Name = "FormMain";
             this.Text = "Gonzo Network Alarm";
             this.Load += new System.EventHandler(this.FormMain_Load);
+            this.spltcontMain.Panel1.ResumeLayout(false);
+            this.spltcontMain.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.spltcontMain)).EndInit();
+            this.spltcontMain.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -146,6 +172,7 @@
         private System.Windows.Forms.Button butLoadOUIDB;
         private System.Windows.Forms.ListView lstvewNetworks;
         private System.Windows.Forms.ColumnHeader colhedSSID;
+        private System.Windows.Forms.SplitContainer spltcontMain;
     }
 }
 

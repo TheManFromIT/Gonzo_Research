@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Gonzo.Microservice;
 using Gonzo.Networking;
+using MacAddressVendorLookup;
 using wclWiFi;
 
 namespace Gonzo
@@ -42,6 +43,7 @@ namespace Gonzo
 
         private IPAddress _currentPingAddress;
 
+        //private AddressMatcher ouiDb;
         private OuiDb ouiDb = new OuiDb();
 
         public Nose(IPAddress localIpAddress, String maliciousBSSID, StringCollection pingSiteList, Guid pingBody, TimeSpan pingTimeout)

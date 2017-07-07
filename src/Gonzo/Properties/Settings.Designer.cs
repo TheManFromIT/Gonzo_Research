@@ -25,30 +25,13 @@ namespace Gonzo.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("fa:8f:ca:5b:39:6d")]
+        [global::System.Configuration.DefaultSettingValueAttribute("aa:40:a0:6f:04:a7")]
         public string MaliciousBSSID {
             get {
                 return ((string)(this["MaliciousBSSID"]));
             }
             set {
                 this["MaliciousBSSID"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>www.google.co.uk</string>
-  <string>www.dave.com</string>
-  <string>www.google.com</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection PingSiteList {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["PingSiteList"]));
-            }
-            set {
-                this["PingSiteList"] = value;
             }
         }
         
@@ -73,6 +56,23 @@ namespace Gonzo.Properties {
             }
             set {
                 this["PingTimeout"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>www.google.co.uk</string>
+  <string>www.google.com</string>
+  <string>www.dave.com</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection PingSiteList {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["PingSiteList"]));
+            }
+            set {
+                this["PingSiteList"] = value;
             }
         }
     }
