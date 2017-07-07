@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.txtMaliciousBSSID = new System.Windows.Forms.TextBox();
             this.butPingTest = new System.Windows.Forms.Button();
             this.butListNeworks = new System.Windows.Forms.Button();
             this.butLoadOUIDB = new System.Windows.Forms.Button();
@@ -37,10 +36,22 @@
             this.lstvewNetworks = new System.Windows.Forms.ListView();
             this.colhedSSID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.spltcontMain = new System.Windows.Forms.SplitContainer();
+            this.txtMaliciousBSSID = new System.Windows.Forms.TextBox();
+            this.spltcontLists = new System.Windows.Forms.SplitContainer();
+            this.lstvewNetworkList = new System.Windows.Forms.ListView();
+            this.colhedChannel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colhedStrength = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colhedMac = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colhedNetworkSSID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colhedManufacturer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.spltcontMain)).BeginInit();
             this.spltcontMain.Panel1.SuspendLayout();
             this.spltcontMain.Panel2.SuspendLayout();
             this.spltcontMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spltcontLists)).BeginInit();
+            this.spltcontLists.Panel1.SuspendLayout();
+            this.spltcontLists.Panel2.SuspendLayout();
+            this.spltcontLists.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -51,16 +62,6 @@
             this.label1.Size = new System.Drawing.Size(132, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Malicious BSSID:";
-            // 
-            // txtMaliciousBSSID
-            // 
-            this.txtMaliciousBSSID.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Gonzo.Properties.Settings.Default, "MaliciousBSSID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtMaliciousBSSID.Location = new System.Drawing.Point(150, 16);
-            this.txtMaliciousBSSID.Name = "txtMaliciousBSSID";
-            this.txtMaliciousBSSID.Size = new System.Drawing.Size(155, 26);
-            this.txtMaliciousBSSID.TabIndex = 1;
-            this.txtMaliciousBSSID.Text = global::Gonzo.Properties.Settings.Default.MaliciousBSSID;
-            this.txtMaliciousBSSID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // butPingTest
             // 
@@ -98,7 +99,7 @@
             this.tailvewLog.Location = new System.Drawing.Point(0, 0);
             this.tailvewLog.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tailvewLog.Name = "tailvewLog";
-            this.tailvewLog.Size = new System.Drawing.Size(821, 479);
+            this.tailvewLog.Size = new System.Drawing.Size(646, 479);
             this.tailvewLog.TabIndex = 4;
             this.tailvewLog.Target = "";
             // 
@@ -110,7 +111,7 @@
             this.lstvewNetworks.Enabled = false;
             this.lstvewNetworks.Location = new System.Drawing.Point(0, 0);
             this.lstvewNetworks.Name = "lstvewNetworks";
-            this.lstvewNetworks.Size = new System.Drawing.Size(412, 479);
+            this.lstvewNetworks.Size = new System.Drawing.Size(587, 236);
             this.lstvewNetworks.TabIndex = 8;
             this.lstvewNetworks.UseCompatibleStateImageBehavior = false;
             this.lstvewNetworks.View = System.Windows.Forms.View.Details;
@@ -130,14 +131,83 @@
             // 
             // spltcontMain.Panel1
             // 
-            this.spltcontMain.Panel1.Controls.Add(this.lstvewNetworks);
+            this.spltcontMain.Panel1.Controls.Add(this.spltcontLists);
             // 
             // spltcontMain.Panel2
             // 
             this.spltcontMain.Panel2.Controls.Add(this.tailvewLog);
             this.spltcontMain.Size = new System.Drawing.Size(1237, 479);
-            this.spltcontMain.SplitterDistance = 412;
+            this.spltcontMain.SplitterDistance = 587;
             this.spltcontMain.TabIndex = 9;
+            // 
+            // txtMaliciousBSSID
+            // 
+            this.txtMaliciousBSSID.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Gonzo.Properties.Settings.Default, "MaliciousBSSID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtMaliciousBSSID.Location = new System.Drawing.Point(150, 16);
+            this.txtMaliciousBSSID.Name = "txtMaliciousBSSID";
+            this.txtMaliciousBSSID.Size = new System.Drawing.Size(155, 26);
+            this.txtMaliciousBSSID.TabIndex = 1;
+            this.txtMaliciousBSSID.Text = global::Gonzo.Properties.Settings.Default.MaliciousBSSID;
+            this.txtMaliciousBSSID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // spltcontLists
+            // 
+            this.spltcontLists.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spltcontLists.Location = new System.Drawing.Point(0, 0);
+            this.spltcontLists.Name = "spltcontLists";
+            this.spltcontLists.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // spltcontLists.Panel1
+            // 
+            this.spltcontLists.Panel1.Controls.Add(this.lstvewNetworkList);
+            // 
+            // spltcontLists.Panel2
+            // 
+            this.spltcontLists.Panel2.Controls.Add(this.lstvewNetworks);
+            this.spltcontLists.Size = new System.Drawing.Size(587, 479);
+            this.spltcontLists.SplitterDistance = 239;
+            this.spltcontLists.TabIndex = 9;
+            // 
+            // lstvewNetworkList
+            // 
+            this.lstvewNetworkList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colhedChannel,
+            this.colhedStrength,
+            this.colhedMac,
+            this.colhedNetworkSSID,
+            this.colhedManufacturer});
+            this.lstvewNetworkList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstvewNetworkList.FullRowSelect = true;
+            this.lstvewNetworkList.Location = new System.Drawing.Point(0, 0);
+            this.lstvewNetworkList.Name = "lstvewNetworkList";
+            this.lstvewNetworkList.Size = new System.Drawing.Size(587, 239);
+            this.lstvewNetworkList.TabIndex = 9;
+            this.lstvewNetworkList.UseCompatibleStateImageBehavior = false;
+            this.lstvewNetworkList.View = System.Windows.Forms.View.Details;
+            // 
+            // colhedChannel
+            // 
+            this.colhedChannel.Text = "Channel";
+            this.colhedChannel.Width = 80;
+            // 
+            // colhedStrength
+            // 
+            this.colhedStrength.Text = "Strength";
+            this.colhedStrength.Width = 124;
+            // 
+            // colhedMac
+            // 
+            this.colhedMac.Text = "Mac";
+            this.colhedMac.Width = 228;
+            // 
+            // colhedNetworkSSID
+            // 
+            this.colhedNetworkSSID.Text = "SSID";
+            this.colhedNetworkSSID.Width = 215;
+            // 
+            // colhedManufacturer
+            // 
+            this.colhedManufacturer.Text = "Manufacturer";
             // 
             // FormMain
             // 
@@ -157,6 +227,10 @@
             this.spltcontMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.spltcontMain)).EndInit();
             this.spltcontMain.ResumeLayout(false);
+            this.spltcontLists.Panel1.ResumeLayout(false);
+            this.spltcontLists.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.spltcontLists)).EndInit();
+            this.spltcontLists.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,6 +247,13 @@
         private System.Windows.Forms.ListView lstvewNetworks;
         private System.Windows.Forms.ColumnHeader colhedSSID;
         private System.Windows.Forms.SplitContainer spltcontMain;
+        private System.Windows.Forms.SplitContainer spltcontLists;
+        private System.Windows.Forms.ListView lstvewNetworkList;
+        private System.Windows.Forms.ColumnHeader colhedChannel;
+        private System.Windows.Forms.ColumnHeader colhedStrength;
+        private System.Windows.Forms.ColumnHeader colhedMac;
+        private System.Windows.Forms.ColumnHeader colhedNetworkSSID;
+        private System.Windows.Forms.ColumnHeader colhedManufacturer;
     }
 }
 

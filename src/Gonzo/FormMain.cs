@@ -53,7 +53,7 @@ namespace Gonzo
         {
             if (lstvewNetworks.InvokeRequired)
             {
-                lstvewNetworks.Invoke(new NetworkListAddDelegate(AddNetwork), new[] {NetworkId});
+                lstvewNetworks.Invoke(new NetworkListAddDelegate(AddNetwork), new[] { NetworkId });
             }
             else
             {
@@ -123,8 +123,35 @@ namespace Gonzo
 
         private void butListNeworks_Click(object sender, EventArgs e)
         {
+            lstvewNetworkList.Items.Clear();
 
-            _nozyParker.GetActiveAccesPoints();
+            var networkList = _nozyParker.GetActiveAccesPoints();
+
+            foreach (var network in networkList)
+            {
+                var newItem = lstvewNetworkList.Items.Add(network.BSSID, network.Channel.ToString(), 0);
+
+                newItem.SubItems.Add(network.Strength.ToString());
+                newItem.SubItems.Add(network.BSSID);
+                newItem.SubItems.Add(network.SSID);
+                newItem.SubItems.Add(network.Manufacturer);
+
+            }
+
+            foreach (ColumnHeader column in lstvewNetworkList.Columns)
+            {
+
+                column.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+                
+                var width = column.Width;
+
+                column.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+
+                if (width > column.Width)
+                {
+                    column.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+                }
+            }
 
         }
 

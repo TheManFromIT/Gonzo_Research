@@ -114,7 +114,9 @@ namespace Gonzo
             //wclNlmConnection[] connections = null;
 
             //networkListManager.GetConnections(out connections);
-            
+
+            var results = new List<AccessPoint>();
+
             wclWiFiInterfaceData[] networkInterfaces = null;
 
             _wiFiClient.EnumInterfaces(out networkInterfaces);
@@ -165,13 +167,26 @@ namespace Gonzo
                             manufacturer = record.Manufacturer;
                         }
 
+                        var accessPoint = new AccessPoint()
+                        {
+                            BSSID = bss.Mac,
+                            Channel = 0,
+                            SSID = bss.Ssid,
+                            Frequency = 0,
+                            Strength = bss.Rssi,
+                            Manufacturer = manufacturer
+                        };
+
                         Log($"{bss.ChCenterFrequency} {bss.Ssid} {bss.Mac} {bss.Rssi} {type} {status} {mode} {manufacturer} {bss.PhyId}");
+
+                        results.Add(accessPoint);
+
                     }
                 }
 
             }
 
-            return null;
+            return results;
         }
 
         private void Sniffer_OnRawFrameReceived(object Sender, byte[] Buffer)
@@ -241,9 +256,9 @@ namespace Gonzo
         public string SSID { get; internal set; }
         public string BSSID { get; internal set; }
         public int Channel { get; internal set; }
-        public FrequencyBand Frequency { get; internal set; }
-        public uint Strength { get; internal set; }
-
+        public int Frequency { get; internal set; }
+        public int Strength { get; internal set; }
+        public string Manufacturer { get; internal set; }
     }
 
     public enum FrequencyBand
